@@ -22,7 +22,9 @@ namespace entityProject.Controllers
 		[HttpGet]
 		public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers()
 		{
-			var users = await context.Users.ToListAsync();
+			var users = await context.Users
+				.Include(p => p.Photos)
+				.ToListAsync();
 			return users;
 		}
         [HttpGet("{id}")]
